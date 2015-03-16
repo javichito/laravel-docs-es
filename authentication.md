@@ -20,17 +20,19 @@ Por defecto, Laravel incluye un modelo `App\User` en tu carpeta `app`. Este mode
 Si tu aplicación no está usando Eloquent, puedes usar el driver de autenticación `database` que usa el constructor de pedidos de Laravel.
 
 <a name="authenticating-users"></a>
-## Authenticating Users
+## Autenticando Usuarios
 
-Laravel ships with two authentication related controllers out of the box. The `AuthController` handles new user registration and "logging in", while the `PasswordController` contains the logic to help existing users reset their forgotten passwords.
+Laravel viene con dos controladores relacionados a autenticación fuera de la caja. El controlador `AuthController` maneja el registro de nuevos usuarios y el "inicio de sesión", mientras que `PasswordController` contiene la lógica que ayuda a los usuarios existentes a resetear sus contraseñas olvidadas.
 
-Each of these controllers uses a trait to include their necessary methods. For many applications, you will not need to modify these controllers at all. The views that these controllers render are located in the `resources/views/auth` directory. You are free to customize these views however you wish.
+Cada uno de estos controladores usa un trait que incluye los métodos necesarios. Para muchas aplicaciones, no vas a necesitar modificar estos controladores. Las vistas que estos controladores renderizan están localizadas en la carpeta `resources/views/auth`. Eres libre de personalizar las vistas como desees.
 
-### The User Registrar
 
-To modify the form fields that are required when a new user registers with your application, you may modify the `App\Services\Registrar` class. This class is responsible for validating and creating new users of your application.
+### El Registro de Usuarios
 
-The `validator` method of the `Registrar` contains the validation rules for new users of the application, while the `create` method of the `Registrar` is responsible for creating new `User` records in your database. You are free to modify each of these methods as you wish. The `Registrar` is called by the `AuthController` via the methods contained in the `AuthenticatesAndRegistersUsers` trait.
+Para modificar los campos del formulario que son requeridos para un nuevo registro de usuario en tu aplicación, debes modificar la clase `App\Services\Registrar`. Esta clase es responsable de la validación y la creación de nuevos usuarios en tu aplicación.
+
+El método `validator` de `Registrar` contiene las reglas de validación para los nuevos usuarios de la aplicación, mientras que el método `create` de `Registrar` es responsable de crear nuevos registros de `User` en tu base de datos. Eres libre de modificar cada uno de estos métodos como desees. El `Registrar` es llamado por `AuthController` a través de los métodos contenidos en el trait `AuthenticatesAndRegistersUsers`.
+
 
 #### Manual Authentication
 

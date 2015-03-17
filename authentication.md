@@ -34,9 +34,9 @@ Para modificar los campos del formulario que son requeridos para un nuevo regist
 El método `validator` de `Registrar` contiene las reglas de validación para los nuevos usuarios de la aplicación, mientras que el método `create` de `Registrar` es responsable de crear nuevos registros de `User` en tu base de datos. Eres libre de modificar cada uno de estos métodos como desees. El `Registrar` es llamado por `AuthController` a través de los métodos contenidos en el trait `AuthenticatesAndRegistersUsers`.
 
 
-#### Manual Authentication
+#### Autenticación Manual
 
-If you choose not to use the provided `AuthController` implementation, you will need to manage the authentication of your users using the Laravel authentication classes directly. Don't worry, it's still a cinch! First, let's check out the `attempt` method:
+Si eliges no usar la implementación `AuthController`, vas a necesitar administrar la autenticación de tus usuarios usando las clases de autenticación de Laravel directamente. No te preocupes, ¡sigue siendo sencillo! Primero, revisemos el método `attempt`.
 
 	<?php namespace App\Http\Controllers;
 
@@ -60,13 +60,14 @@ If you choose not to use the provided `AuthController` implementation, you will 
 
 	}
 
-The `attempt` method accepts an array of key / value pairs as its first argument. The `password` value will be [hashed](/5.0/hashing). The other values in the array will be used to find the user in your database table. So, in the example above, the user will be retrieved by the value of the `email` column. If the user is found, the hashed password stored in the database will be compared with the hashed `password` value passed to the method via the array. If the two hashed passwords match, a new authenticated session will be started for the user.
+El método `attempt` acepta un arreglo de pares de llave / valor como primer argumento. El valor `password` va a ser [hasheado](/5.0/hashing). Los otros valores en el arreglo serán usados para encontrar al usuario en la tabla de tu base de datos. Así que, en el ejemplo de arriba, el usuario será devuelto a partir del valor de la columna `email`. Si el usuario es encontrado, la contraseña hasheada almacenada en la base de datos será comparada con el valor de `password` hasheado que ha sido pasado al método a través del arreglo. Si ambas contraseñas son iguales, una nueva sesión autenticada será iniciada para el usuario.
 
-The `attempt` method will return `true` if authentication was successful. Otherwise, `false` will be returned.
+El método `attempt` devolverá `true` si la autenticación fue exitosa. De otra manera, `false` será devuelto.
 
-> **Note:** In this example, `email` is not a required option, it is merely used as an example. You should use whatever column name corresponds to a "username" in your database.
+> **Nota:** En este ejemplo, `email` no es una opción requerida, simplemente es usado como ejemplo. Deberías usar la columna que equivalga a un "nombre de usuario" en tu base de datos.
 
-The `intended` redirect function will redirect the user to the URL they were attempting to access before being caught by the authentication filter. A fallback URI may be given to this method in case the intended destination is not available.
+La función de redireción `intended` va a redirigir al usuario a la URL a la que intentaban acceder antes de ser capturado por el filtro de autenticación. Una URI por defecto puede ser dada a este método en caso que el destino no se encuentre disponible.
+
 
 #### Authenticating A User With Conditions
 
